@@ -1,3 +1,5 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 const { MongoClient, ServerApiVersion } = require("mongodb");
 export default handler;
 
@@ -7,7 +9,7 @@ const mockAchievement = {
 };
 const URI = `mongodb+srv://admin:${process.env.MONGODB_PASSWORD}@cluster0.8e8eh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
-async function handler(req, res) {
+async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   switch (req.method) {
     case "GET":
       const client = new MongoClient(URI, {
