@@ -9,7 +9,7 @@ const mockAchievement = {
 };
 const URI = `mongodb+srv://admin:${process.env.MONGODB_PASSWORD}@cluster0.8e8eh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
-async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   switch (req.method) {
     case "GET":
       const client = new MongoClient(URI, {
