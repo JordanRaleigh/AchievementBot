@@ -10,18 +10,18 @@ const mockAchievement = {
 const URI = `mongodb+srv://admin:${process.env.MONGODB_PASSWORD}@cluster0.8e8eh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
 async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
+  const client = new MongoClient(URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverApi: ServerApiVersion.v1,
+  });
+
+  await client.connect();
+
+  const db = client.db("pie");
+
   switch (req.method) {
     case "GET":
-      const client = new MongoClient(URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        serverApi: ServerApiVersion.v1,
-      });
-
-      await client.connect();
-
-      const db = client.db("sample_mflix");
-
       const query = { username: "jordanraleigh" };
 
       const achievement = await db.collection("achievements").findOne(query);
@@ -29,5 +29,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
       console.log(achievement);
 
       res.status(200).json(achievement);
+
+    case "POST":
+      const result = await db.collection("achievements").insertOne(req.body);
+
+      res.status(200).json(result);
   }
 }
