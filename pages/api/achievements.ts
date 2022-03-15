@@ -22,7 +22,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
 
       const db = client.db("sample_mflix");
 
-      const query = { username: "michaelsholty" };
+      const query = { username: "jordanraleigh" };
 
       const achievement = await db.collection("achievements").findOne(query);
 
