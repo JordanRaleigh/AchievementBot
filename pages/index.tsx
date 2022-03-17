@@ -10,7 +10,7 @@ const Home: NextPage = (props: any) => {
       <h1>Application</h1>
       <p>The current Achievements:</p>
       <ul>
-        {props.achievements.map(function (achievement) {
+        {props.achievements.map(function (achievement: any) {
           return <li key={achievement._id}>{achievement.text}</li>;
         })}
       </ul>
