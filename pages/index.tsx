@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import getConfig from "next/config";
 
 const Home: NextPage = (props: any) => {
   // console.log(props.text);
@@ -19,7 +20,10 @@ const Home: NextPage = (props: any) => {
 };
 
 Home.getInitialProps = async (ctx) => {
-  const res = await fetch("http://localhost:3000/api/achievements");
+  const config = getConfig();
+
+  console.log(config.publicRuntimeConfig.apiUrl);
+  const res = await fetch(`${config.publicRuntimeConfig.apiUrl}/achievements`);
   const json = await res.json();
 
   return { achievements: json };
