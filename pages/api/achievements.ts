@@ -3,10 +3,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 const { MongoClient, ServerApiVersion } = require("mongodb");
 export default handler;
 
-const mockAchievement = {
-  user: "bob",
-  text: "Got into PIE",
-};
 const URI = `mongodb+srv://admin:${process.env.MONGODB_PASSWORD}@cluster0.8e8eh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
 async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
@@ -28,8 +24,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
         .collection("achievements")
         .find(query)
         .toArray();
-
-      // console.log(achievement);
 
       return res.status(200).json(achievements);
 
