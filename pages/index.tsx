@@ -9,7 +9,7 @@ const Home: NextPage = (props: any) => {
   const [text, setText] = useState(false);
   const [username, setUsername] = useState(false);
 
-  const submitItem = async (event: Event) => {
+  const submitItem = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const config = getConfig();
     const sampleData = { username: username, text: text };
