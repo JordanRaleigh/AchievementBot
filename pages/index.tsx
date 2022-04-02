@@ -65,6 +65,10 @@ const Home: NextPage = (props: any) => {
           })}
         </p>
       </div>
+      <p>
+        Inspirational quotes provided by{" "}
+        <a href="https://zenquotes.io/">ZenQuotes API</a>
+      </p>
     </>
   );
 };
