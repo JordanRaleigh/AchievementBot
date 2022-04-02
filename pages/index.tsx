@@ -53,6 +53,22 @@ const Home: NextPage = (props: any) => {
           })}
         </ul>
       </div>
+      <div>
+        <p>
+          {props.quote.map(function (quote: any) {
+            return (
+              <div key={"1"}>
+                <h3>{quote.q}</h3>
+                <h4>{quote.a}</h4>
+              </div>
+            );
+          })}
+        </p>
+      </div>
+      <p>
+        Inspirational quotes provided by{" "}
+        <a href="https://zenquotes.io/">ZenQuotes API</a>
+      </p>
     </>
   );
 };
@@ -62,9 +78,15 @@ Home.getInitialProps = async (ctx) => {
 
   const res = await fetch(`${config.publicRuntimeConfig.apiUrl}/achievements`);
 
-  const json = await res.json();
+  const achievementsJson = await res.json();
 
-  return { achievements: json };
+  const quoteResponse = await fetch(
+    `https://zenquotes.io/api/today/${config.publicRuntimeConfig.quoteKey}`
+  );
+
+  const quoteJson = await quoteResponse.json();
+
+  return { achievements: achievementsJson, quote: quoteJson };
 };
 
 export default Home;

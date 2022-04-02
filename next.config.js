@@ -6,6 +6,7 @@ const nextConfig = {
 module.exports = {
   publicRuntimeConfig: {
     apiUrl: process.env.API_URL,
+    quoteKey: process.env.QUOTE_KEY,
   },
   nextConfig,
 };
