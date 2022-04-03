@@ -5,6 +5,7 @@ export default function Login() {
   const { data: session } = useSession();
 
   if (session) {
+    console.log(session.user);
     return (
       <>
         Signed in as {session.user?.email} <br />
