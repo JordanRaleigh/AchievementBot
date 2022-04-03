@@ -4,10 +4,13 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import getConfig from "next/config";
+import Login from "./login";
+import { useSession } from "next-auth/react";
 
 const Home: NextPage = (props: any) => {
   const [text, setText] = useState(false);
   const [username, setUsername] = useState(false);
+  const { data: session, status } = useSession();
 
   const submitItem = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,6 +32,7 @@ const Home: NextPage = (props: any) => {
 
   return (
     <>
+      <Login />
       <h1>Application</h1>
       <form onSubmit={submitItem}>
         <input
