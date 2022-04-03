@@ -6,28 +6,37 @@ import styles from "../styles/Home.module.css";
 import getConfig from "next/config";
 import Login from "./login";
 import { useSession } from "next-auth/react";
+import { useCookies } from "react-cookie";
 
 const Home: NextPage = (props: any) => {
   const [text, setText] = useState(false);
-  const [username, setUsername] = useState(false);
-  const { data: session, status } = useSession();
+  const [year, setYear] = useState(false);
+  const { data: session } = useSession();
 
   const submitItem = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const config = getConfig();
-    const sampleData = { username: username, text: text };
-    const res = await fetch(
-      `${config.publicRuntimeConfig.apiUrl}/achievements`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(sampleData),
-      }
-    );
+    if (session) {
+      event.preventDefault();
+      const config = getConfig();
+      const sampleData = {
+        username: session.user?.email,
+        year: year,
+        text: text,
+      };
+      const res = await fetch(
+        `${config.publicRuntimeConfig.apiUrl}/achievements`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(sampleData),
+        }
+      );
 
-    const json = await res.json();
+      const json = await res.json();
+    } else {
+      alert("Please login to submit an achievement");
+    }
   };
 
   return (
@@ -35,11 +44,13 @@ const Home: NextPage = (props: any) => {
       <Login />
       <h1>Application</h1>
       <form onSubmit={submitItem}>
+        <label>In... </label>
         <input
           type="text"
-          placeholder="Username"
-          onChange={(e) => setUsername(e.target.value as any)}
+          placeholder="Year"
+          onChange={(e) => setYear(e.target.value as any)}
         />
+        <label> I... </label>
         <input
           type="text"
           placeholder="Achievement"

@@ -1,11 +1,17 @@
 import { useSession, signIn, signOut } from "next-auth/react";
-import Link from "next/link";
+import { useCookies } from "react-cookie";
 
 export default function Login() {
   const { data: session } = useSession();
+  const [cookies, setCookie] = useCookies(["user"]);
 
   if (session) {
     console.log(session.user);
+    setCookie("user", JSON.stringify(session.user?.email), {
+      path: "/",
+      sameSite: true,
+    });
+
     return (
       <>
         Signed in as {session.user?.email} <br />
@@ -13,6 +19,11 @@ export default function Login() {
       </>
     );
   }
+  setCookie("user", "jordan.raleigh"),
+    {
+      path: "/",
+      sameSite: true,
+    };
   return (
     <>
       Not signed in <br />

@@ -9,11 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/react-cookies": "^0.1.0",
+    "cookie": "^0.4.2",
+    "cookie-cutter": "^0.2.0",
+    "cookies": "^0.8.0",
     "mongodb": "^4.4.1",
     "next": "12.1.0",
     "next-auth": "^4.3.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-cookie": "^4.1.1",
+    "react-dom": "17.0.2",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
     "@types/node": "17.0.21",
