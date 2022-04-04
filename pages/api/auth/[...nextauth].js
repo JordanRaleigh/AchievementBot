@@ -8,7 +8,7 @@ const options = {
       clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
-  debug: false,
+  debug: true,
 };
 
 // eslint-disable-next-line
