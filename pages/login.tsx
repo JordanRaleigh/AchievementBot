@@ -7,7 +7,7 @@ export default function Login() {
 
   if (session) {
     console.log(session.user);
-    setCookie("user", JSON.stringify(session.user?.email), {
+    setCookie("user", session.user?.email, {
       path: "/",
       sameSite: true,
     });
@@ -19,11 +19,12 @@ export default function Login() {
       </>
     );
   }
-  setCookie("user", "jordan.raleigh"),
-    {
-      path: "/",
-      sameSite: true,
-    };
+  //Cookie Testing Purposes
+  //setCookie("user", "jordan.raleigh"),
+  //   {
+  //     path: "/",
+  //     sameSite: true,
+  //   };
   return (
     <>
       Not signed in <br />
