@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import Cookies from "universal-cookie";
 
 const { MongoClient, ServerApiVersion } = require("mongodb");
 export default handler;
@@ -19,11 +18,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
 
   switch (req.method) {
     case "GET":
-      console.log("jelloooo");
-      const cookies = new Cookies(req.headers.cookie);
-      console.log("cookie get", cookies.get("user"));
-      const username = cookies.get("user");
-
+      const username = req.query.user;
       const query = { username: username };
       console.log("username", username);
       const achievements = await db

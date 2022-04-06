@@ -6,7 +6,12 @@ import styles from "../styles/Home.module.css";
 import getConfig from "next/config";
 import Login from "./login";
 import { useSession } from "next-auth/react";
-import { useCookies } from "react-cookie";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import WorkIcon from "@mui/icons-material/Work";
 
 const Home: NextPage = (props: any) => {
   const [text, setText] = useState(false);
@@ -62,11 +67,25 @@ const Home: NextPage = (props: any) => {
       </form>
       <p>The current Achievements:</p>
       <div>
-        <ul>
+        <List
+          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+        >
           {props.achievements.map(function (achievement: any) {
-            return <li key={achievement._id}>{achievement.text}</li>;
+            return (
+              <ListItem key={achievement._id}>
+                <ListItemAvatar>
+                  <Avatar>
+                    <WorkIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={achievement.text}
+                  secondary="Jan 9, 2014"
+                />
+              </ListItem>
+            );
           })}
-        </ul>
+        </List>
       </div>
       <div>
         <p>
@@ -88,10 +107,11 @@ const Home: NextPage = (props: any) => {
   );
 };
 
-Home.getInitialProps = async (ctx) => {
+export async function getServerSideProps(ctx: any) {
   const config = getConfig();
-
-  const res = await fetch(`${config.publicRuntimeConfig.apiUrl}/achievements`);
+  const res = await fetch(
+    `${config.publicRuntimeConfig.apiUrl}/achievements?user=${ctx.req.cookies.user}`
+  );
 
   const achievementsJson = await res.json();
 
@@ -101,7 +121,12 @@ Home.getInitialProps = async (ctx) => {
 
   const quoteJson = await quoteResponse.json();
 
-  return { achievements: achievementsJson, quote: quoteJson };
-};
+  return {
+    props: {
+      achievements: achievementsJson,
+      quote: quoteJson,
+    },
+  };
+}
 
 export default Home;
