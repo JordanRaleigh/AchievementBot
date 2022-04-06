@@ -107,7 +107,7 @@ const Home: NextPage = (props: any) => {
   );
 };
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps(ctx: any) {
   const config = getConfig();
   const res = await fetch(
     `${config.publicRuntimeConfig.apiUrl}/achievements?user=${ctx.req.cookies.user}`
