@@ -7,7 +7,6 @@ export default function Login() {
   const [cookies, setCookie] = useCookies(["user"]);
 
   if (session) {
-    console.log(session.user);
     setCookie("user", session.user?.email, {
       path: "/",
       sameSite: true,
@@ -22,12 +21,6 @@ export default function Login() {
       </>
     );
   }
-  //Cookie Testing Purposes
-  //setCookie("user", "jordan.raleigh"),
-  //   {
-  //     path: "/",
-  //     sameSite: true,
-  //   };
   return (
     <>
       Not signed in <br />
