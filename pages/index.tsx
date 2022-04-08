@@ -12,6 +12,12 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import WorkIcon from "@mui/icons-material/Work";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import Alert from "@mui/material/Alert";
 
 const Home: NextPage = (props: any) => {
   const [text, setText] = useState(false);
@@ -47,23 +53,38 @@ const Home: NextPage = (props: any) => {
   return (
     <>
       <Login />
-      <h1>Application</h1>
+      <h1>AchievementBot</h1>
       <form onSubmit={submitItem}>
-        <label>In... </label>
-        <input
-          type="text"
-          placeholder="Year"
-          onChange={(e) => setYear(e.target.value as any)}
-        />
-        <label> I... </label>
-        <input
-          type="text"
-          placeholder="Achievement"
-          onChange={(e) => setText(e.target.value as any)}
-        />
-        <button id="addItem" type="submit">
-          Submit
-        </button>
+        <Box
+          component="form"
+          sx={{
+            "& > :not(style)": { m: 1, width: "25ch" },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <label>In... </label>
+          <TextField
+            id="standard-basic"
+            label="Year"
+            variant="standard"
+            type="text"
+            placeholder="Year"
+            onChange={(e) => setYear(e.target.value as any)}
+          />
+          <label> I... </label>
+          <TextField
+            id="standard-basic"
+            label="Achievement"
+            variant="standard"
+            type="text"
+            placeholder="Achievement"
+            onChange={(e) => setText(e.target.value as any)}
+          />
+          <Button variant="contained" id="addItem" type="submit">
+            Submit
+          </Button>
+        </Box>
       </form>
       <p>The current Achievements:</p>
       <div>
@@ -72,17 +93,27 @@ const Home: NextPage = (props: any) => {
         >
           {props.achievements.map(function (achievement: any) {
             return (
-              <ListItem key={achievement._id}>
-                <ListItemAvatar>
-                  <Avatar>
-                    <WorkIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={achievement.text}
-                  secondary="Jan 9, 2014"
-                />
-              </ListItem>
+              <List
+                key={achievement._id}
+                sx={{
+                  width: "100%",
+                  maxWidth: 360,
+                  bgcolor: "background.paper",
+                }}
+              >
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <WorkIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={achievement.text}
+                    secondary={achievement.year}
+                  />
+                </ListItem>
+                <Divider variant="inset" component="li" />
+              </List>
             );
           })}
         </List>
