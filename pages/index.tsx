@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import "typeface-roboto";
 import getConfig from "next/config";
 import Login from "./login";
 import { useSession } from "next-auth/react";
@@ -12,6 +13,13 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import WorkIcon from "@mui/icons-material/Work";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import Alert from "@mui/material/Alert";
 
 const Home: NextPage = (props: any) => {
   const [text, setText] = useState(false);
@@ -46,43 +54,70 @@ const Home: NextPage = (props: any) => {
 
   return (
     <>
-      <Login />
-      <h1>Application</h1>
-      <form onSubmit={submitItem}>
-        <label>In... </label>
-        <input
-          type="text"
-          placeholder="Year"
-          onChange={(e) => setYear(e.target.value as any)}
-        />
-        <label> I... </label>
-        <input
-          type="text"
-          placeholder="Achievement"
-          onChange={(e) => setText(e.target.value as any)}
-        />
-        <button id="addItem" type="submit">
-          Submit
-        </button>
-      </form>
-      <p>The current Achievements:</p>
       <div>
-        <List
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-        >
+        <Login />
+      </div>
+      <div>
+        <h1>AchievementBot</h1>
+        <form onSubmit={submitItem}>
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <label>In... </label>
+            <TextField
+              id="standard-basic"
+              label="Year"
+              variant="standard"
+              type="text"
+              placeholder="Year"
+              onChange={(e) => setYear(e.target.value as any)}
+            />
+            <label> I... </label>
+            <TextField
+              id="standard-basic"
+              label="Achievement"
+              variant="standard"
+              type="text"
+              placeholder="Achievement"
+              onChange={(e) => setText(e.target.value as any)}
+            />
+            <Button variant="contained" id="addItem" type="submit">
+              Submit
+            </Button>
+          </Box>
+        </form>
+      </div>
+      <div>
+        <p>The current Achievements:</p>
+        <List>
           {props.achievements.map(function (achievement: any) {
             return (
-              <ListItem key={achievement._id}>
-                <ListItemAvatar>
-                  <Avatar>
-                    <WorkIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={achievement.text}
-                  secondary="Jan 9, 2014"
-                />
-              </ListItem>
+              <List
+                key={achievement._id}
+                sx={{
+                  width: "100%",
+                  maxWidth: 360,
+                  bgcolor: "background.paper",
+                }}
+              >
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <CheckCircleIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={achievement.text}
+                    secondary={achievement.year}
+                  />
+                </ListItem>
+                <Divider variant="inset" component="li" />
+              </List>
             );
           })}
         </List>
@@ -98,11 +133,11 @@ const Home: NextPage = (props: any) => {
             );
           })}
         </p>
+        <p>
+          Inspirational quotes provided by{" "}
+          <a href="https://zenquotes.io/">ZenQuotes API</a>
+        </p>
       </div>
-      <p>
-        Inspirational quotes provided by{" "}
-        <a href="https://zenquotes.io/">ZenQuotes API</a>
-      </p>
     </>
   );
 };

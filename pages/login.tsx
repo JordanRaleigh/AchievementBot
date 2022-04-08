@@ -14,7 +14,7 @@ export default function Login() {
 
     return (
       <>
-        Signed in as {session.user?.email} <br />
+        Signed in as {session.user?.email}
         <Button variant="outlined" onClick={() => signOut()}>
           Sign out
         </Button>
@@ -24,7 +24,9 @@ export default function Login() {
   return (
     <>
       Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
+      <Button variant="contained" onClick={() => signIn()}>
+        Sign in
+      </Button>
     </>
   );
 }
