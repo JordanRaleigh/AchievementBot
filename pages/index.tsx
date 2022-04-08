@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import "typeface-roboto";
 import getConfig from "next/config";
 import Login from "./login";
 import { useSession } from "next-auth/react";
@@ -12,6 +13,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import WorkIcon from "@mui/icons-material/Work";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
@@ -52,45 +54,47 @@ const Home: NextPage = (props: any) => {
 
   return (
     <>
-      <Login />
-      <h1>AchievementBot</h1>
-      <form onSubmit={submitItem}>
-        <Box
-          component="form"
-          sx={{
-            "& > :not(style)": { m: 1, width: "25ch" },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <label>In... </label>
-          <TextField
-            id="standard-basic"
-            label="Year"
-            variant="standard"
-            type="text"
-            placeholder="Year"
-            onChange={(e) => setYear(e.target.value as any)}
-          />
-          <label> I... </label>
-          <TextField
-            id="standard-basic"
-            label="Achievement"
-            variant="standard"
-            type="text"
-            placeholder="Achievement"
-            onChange={(e) => setText(e.target.value as any)}
-          />
-          <Button variant="contained" id="addItem" type="submit">
-            Submit
-          </Button>
-        </Box>
-      </form>
-      <p>The current Achievements:</p>
       <div>
-        <List
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-        >
+        <Login />
+      </div>
+      <div>
+        <h1>AchievementBot</h1>
+        <form onSubmit={submitItem}>
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <label>In... </label>
+            <TextField
+              id="standard-basic"
+              label="Year"
+              variant="standard"
+              type="text"
+              placeholder="Year"
+              onChange={(e) => setYear(e.target.value as any)}
+            />
+            <label> I... </label>
+            <TextField
+              id="standard-basic"
+              label="Achievement"
+              variant="standard"
+              type="text"
+              placeholder="Achievement"
+              onChange={(e) => setText(e.target.value as any)}
+            />
+            <Button variant="contained" id="addItem" type="submit">
+              Submit
+            </Button>
+          </Box>
+        </form>
+      </div>
+      <div>
+        <p>The current Achievements:</p>
+        <List>
           {props.achievements.map(function (achievement: any) {
             return (
               <List
@@ -104,7 +108,7 @@ const Home: NextPage = (props: any) => {
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar>
-                      <WorkIcon />
+                      <CheckCircleIcon />
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
@@ -129,11 +133,11 @@ const Home: NextPage = (props: any) => {
             );
           })}
         </p>
+        <p>
+          Inspirational quotes provided by{" "}
+          <a href="https://zenquotes.io/">ZenQuotes API</a>
+        </p>
       </div>
-      <p>
-        Inspirational quotes provided by{" "}
-        <a href="https://zenquotes.io/">ZenQuotes API</a>
-      </p>
     </>
   );
 };
