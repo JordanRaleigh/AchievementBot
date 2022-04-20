@@ -53,7 +53,7 @@ const Home: NextPage = (props: any) => {
   };
 
   return (
-    <>
+    <div className="container-main">
       <div>
         <Login />
       </div>
@@ -68,20 +68,16 @@ const Home: NextPage = (props: any) => {
             noValidate
             autoComplete="off"
           >
-            <label>In... </label>
-            <TextField
-              id="standard-basic"
-              label="Year"
-              variant="standard"
+            <span className="label1">In... </span>
+            <input
+              className="input1"
               type="text"
               placeholder="Year"
               onChange={(e) => setYear(e.target.value as any)}
             />
-            <label> I... </label>
-            <TextField
-              id="standard-basic"
-              label="Achievement"
-              variant="standard"
+            <span className="label1"> I... </span>
+            <input
+              className="input1"
               type="text"
               placeholder="Achievement"
               onChange={(e) => setText(e.target.value as any)}
@@ -93,31 +89,16 @@ const Home: NextPage = (props: any) => {
         </form>
       </div>
       <div>
-        <p>The current Achievements:</p>
+        <p className="text-bold achieve-title">The current Achievements:</p>
         <List>
           {props.achievements.map(function (achievement: any) {
             return (
-              <List
-                key={achievement._id}
-                sx={{
-                  width: "100%",
-                  maxWidth: 360,
-                  bgcolor: "background.paper",
-                }}
-              >
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <CheckCircleIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={achievement.text}
-                    secondary={achievement.year}
-                  />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-              </List>
+              <div key={achievement._id} className="flex-row achieve-container">
+                <p>
+                  In <span>{achievement.year}</span>, I{" "}
+                  <span>{achievement.text}</span>
+                </p>
+              </div>
             );
           })}
         </List>
@@ -138,7 +119,7 @@ const Home: NextPage = (props: any) => {
           <a href="https://zenquotes.io/">ZenQuotes API</a>
         </p>
       </div>
-    </>
+    </div>
   );
 };
 
