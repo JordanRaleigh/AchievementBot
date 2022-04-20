@@ -6,6 +6,11 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background-image: url("/backgroundImage2.JPG");
   background-size: cover;
+  background-repeat: no-repeat;
+}
+
+:root {
+  --large-font: 2em;
 }
 
 a {
@@ -13,7 +18,73 @@ a {
   text-decoration: none;
 }
 
+div {
+  color: white;
+}
+
 * {
   box-sizing: border-box;
   text-align: -webkit-center;
+}
+
+
+.label1 {
+  font-size: large;
+  font-weight: 600;
+}
+
+
+.input1 {
+  font-size: large;
+  font-weight: bold;
+  color: white;
+  outline: none;
+  background-color: transparent;
+  text-align: left;
+  border: none;
+  border-bottom: 0.1em solid white;
+  /* backdrop-filter: blur(2px); */
+}
+
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgba(255, 255, 255, 0.796);
+  opacity: 1; /* Firefox */
+}
+
+.container-main {
+  min-height: 100vh;
+}
+
+.achieve-title{
+  font-size: 1.75em;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.center-flex {
+  align-items: center;
+  justify-content: center;
+}
+
+.achieve-container {
+  padding: 1em 1em;
+  font-weight: bold;
+  justify-content: space-around;
+  width: fit-content;
+  border-bottom: solid white 0.1em;
+    backdrop-filter: blur(2px);
+
 }
