@@ -1,25 +1,11 @@
 import type { NextPage } from "next";
 import React, { useState } from "react";
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import "typeface-roboto";
 import getConfig from "next/config";
 import Login from "./login";
 import { useSession } from "next-auth/react";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
-import WorkIcon from "@mui/icons-material/Work";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
-import Alert from "@mui/material/Alert";
 
 const Home: NextPage = (props: any) => {
   const [text, setText] = useState(false);
@@ -27,7 +13,9 @@ const Home: NextPage = (props: any) => {
   const { data: session } = useSession();
 
   const submitItem = async (event: React.FormEvent<HTMLFormElement>) => {
+    console.log("hit the submitItem");
     if (session) {
+      console.log("inside session if");
       event.preventDefault();
       const config = getConfig();
       const sampleData = {
@@ -60,32 +48,23 @@ const Home: NextPage = (props: any) => {
       <div>
         <h1>AchievementBot</h1>
         <form onSubmit={submitItem}>
-          <Box
-            component="form"
-            sx={{
-              "& > :not(style)": { m: 1, width: "25ch" },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <span className="label1">In... </span>
-            <input
-              className="input1"
-              type="text"
-              placeholder="Year"
-              onChange={(e) => setYear(e.target.value as any)}
-            />
-            <span className="label1"> I... </span>
-            <input
-              className="input1"
-              type="text"
-              placeholder="Achievement"
-              onChange={(e) => setText(e.target.value as any)}
-            />
-            <Button variant="contained" id="addItem" type="submit">
-              Submit
-            </Button>
-          </Box>
+          <span className="label1">In... </span>
+          <input
+            className="input1"
+            type="text"
+            placeholder="Year"
+            onChange={(e) => setYear(e.target.value as any)}
+          />
+          <span className="label1"> I... </span>
+          <input
+            className="input1"
+            type="text"
+            placeholder="Achievement"
+            onChange={(e) => setText(e.target.value as any)}
+          />
+          <Button variant="contained" id="addItem" type="submit">
+            Submit
+          </Button>
         </form>
       </div>
       <div>
