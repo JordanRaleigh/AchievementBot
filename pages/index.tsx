@@ -33,8 +33,8 @@ const Home: NextPage = (props: any) => {
           body: JSON.stringify(sampleData),
         }
       );
-
       const json = await res.json();
+      window.location.reload();
     } else {
       alert("Please login to submit an achievement");
     }

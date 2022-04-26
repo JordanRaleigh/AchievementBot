@@ -29,8 +29,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
       return res.status(200).json(achievements);
 
     case "POST":
+      console.log("hey here post 1");
       const result = await db.collection("achievements").insertOne(req.body);
-
+      console.log("hey here post 2");
       return res.status(200).json(result);
   }
 }

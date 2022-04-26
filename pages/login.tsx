@@ -4,7 +4,18 @@ import Button from "@mui/material/Button";
 
 export default function Login() {
   const { data: session } = useSession();
-  const [cookies, setCookie] = useCookies(["user"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+
+  function signingOut() {
+    removeCookie("user", { path: "/" });
+    signOut();
+    window.location.reload();
+  }
+
+  function signingIn() {
+    signIn();
+    window.location.reload();
+  }
 
   if (session) {
     setCookie("user", session.user?.email, {
@@ -15,7 +26,7 @@ export default function Login() {
     return (
       <>
         Signed in as {session.user?.email}
-        <Button variant="outlined" onClick={() => signOut()}>
+        <Button variant="outlined" onClick={signingOut}>
           Sign out
         </Button>
       </>
@@ -24,7 +35,7 @@ export default function Login() {
   return (
     <>
       Not signed in <br />
-      <Button variant="contained" onClick={() => signIn()}>
+      <Button variant="contained" onClick={signingIn}>
         Sign in
       </Button>
     </>
